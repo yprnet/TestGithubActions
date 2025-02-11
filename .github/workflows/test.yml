@@ -13,11 +13,11 @@ jobs:
 
     - name: Build Qt
       run: |
-      cd ..
-      mkdir Qt
-      cd Qt
-      mkdir 6.8.2
-      mkdir 6.8.2-static
+        mkdir Qt
+        cd Qt
+        mkdir 6.8.2
+        mkdir 6.8.2-static
+      working-directory: ./
 
     - name: Package binaries
       run: |
