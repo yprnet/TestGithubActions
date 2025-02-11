@@ -15,7 +15,7 @@ jobs:
     # 构建 Qt    
     - name: Build Qt
       run: |
-      ls
+        ./Test2.cmd
 
     # 打包
     - name: Package binaries
