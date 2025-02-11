@@ -3,21 +3,21 @@ name: Test
 #on: workflow_dispatch
 on: [push, pull_request]
 
-env:
-  QT_VERSION: 6.8.3
-
 jobs:
   windows_Tset:
     runs-on: windows-latest
 
     steps:
-    # 检测本仓库
+    # 检出本仓库
     - name: Checkout repository
       uses: actions/checkout@v4
     
     # 构建 Qt    
     - name: Build Qt
       run: |
+        #设置powershell变量，设置Qt版本
+        $QT_VERSION=6.8.3 
+      
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
         
         cd ..   #Directory: D:\a\TestGithubActions
