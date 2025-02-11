@@ -7,28 +7,23 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    # 检出本仓库
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 安装python
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.13'
         architecture: 'x64'
 
-    # 安装msvc
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v2
       with:
         msbuild-architecture: x64
 
-    # 安装vsdevenv
     - name: Setup vsdevenv
       uses: seanmiddleditch/gha-setup-vsdevenv@master
 
-    # 构建Qt
     - name: Build Qt
       run: |
         #设置powershell变量，设置Qt版本
@@ -64,12 +59,12 @@ jobs:
         cmake --build . --parallel
         #安装(不要忘记点)
         cmake --install .
-    # 打包
+
     - name: Package binaries
       run: |
 	    #ls     #Directory: D:\a\buildQt\buildQt(即库存目录)
         7z a Qt_6.8.2-static-Release_msvc2022_64.zip ../Qt/6.8.2-static
-	# 上传
+
     - uses: actions/upload-artifact@v4
       with:
         name: Qt_6.8.2-static-Release_msvc2022_64
