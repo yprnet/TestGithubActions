@@ -15,6 +15,7 @@ jobs:
     # 构建 Qt    
     - name: Build Qt
       run: |
+        ls
         cmd.exe /c call D:\a\TestGithubActions\TestGithubActions\Test.bat
 
     # 打包
