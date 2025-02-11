@@ -1,7 +1,7 @@
 name: Test2
 
-on: workflow_dispatch
-#on: [push, pull_request]
+#on: workflow_dispatch
+on: [push, pull_request]
 
 jobs:
   windows_Tset:
@@ -15,7 +15,7 @@ jobs:
     # 构建 Qt    
     - name: Build Qt
       run: |
-        cmd.exe /c "call `D:\a\TestGithubActions\TestGithubActions\Test.cmd`"
+        cmd.exe /c "call `"D:\a\TestGithubActions\TestGithubActions\Test.cmd`""
 
     # 打包
     - name: Package binaries
