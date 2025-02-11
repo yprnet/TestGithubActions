@@ -13,4 +13,7 @@ jobs:
 
     - name: Build Qt
       run: |
+        #ls #Directory: D:\a\TestGithubActions\TestGithubActions即库存目录
+        cd ..
+        mk -p Qt
         ls
