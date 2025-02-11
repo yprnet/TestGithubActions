@@ -38,6 +38,10 @@ mkdir "%BUILD_DIR%" && cd /d "%BUILD_DIR%"
 :: 安装(不要忘记点)
 ::cmake --install .
 
+:: 临时使用，后续需删除
+rmdir /s /q %INSTALL_DIR%\bin
+mkdir %INSTALL_DIR%\bin
+
 ::复制qt.conf
 copy %~dp0\qt.conf %INSTALL_DIR%\bin
 
