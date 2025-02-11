@@ -64,7 +64,7 @@ jobs:
         cmake --build . --parallel
         #安装(不要忘记点)
         cmake --install .
-
+        
     # 打包
     - name: Package binaries
       run: |
