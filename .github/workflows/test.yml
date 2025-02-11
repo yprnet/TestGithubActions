@@ -3,6 +3,9 @@ name: Test
 #on: workflow_dispatch
 on: [push, pull_request]
 
+env:
+  QT_VERSION: 6.8.3
+
 jobs:
   windows_Tset:
     runs-on: windows-latest
@@ -14,8 +17,6 @@ jobs:
     
     # 构建 Qt    
     - name: Build Qt
-    env:
-        QT_VERSION: 6.8.3
       run: |
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
         
