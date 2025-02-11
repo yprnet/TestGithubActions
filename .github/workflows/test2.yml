@@ -1,0 +1,30 @@
+name: Test2
+
+on: workflow_dispatch
+#on: [push, pull_request]
+
+jobs:
+  windows_Tset:
+    runs-on: windows-latest
+
+    steps:
+    # 检出本仓库
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    # 构建 Qt    
+    - name: Build Qt
+      run: |
+      ./Test2.cmd
+
+    # 打包
+    - name: Package binaries
+      run: |
+        #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
+        7z a Tset2.zip ../Qt/6.8.2-static
+
+    # 上传
+    - uses: actions/upload-artifact@v4
+      with:
+        name: Tset2
+        path: Tset2.zip

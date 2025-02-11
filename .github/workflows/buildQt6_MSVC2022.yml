@@ -7,23 +7,28 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    # 检出本仓库
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    # 安装python
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.13'
         architecture: 'x64'
 
+    # 安装msvc
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v2
       with:
         msbuild-architecture: x64
 
+    # 安装vsdevenv
     - name: Setup vsdevenv
       uses: seanmiddleditch/gha-setup-vsdevenv@master
 
+    # 构建Qt
     - name: Build Qt
       run: |
         #设置powershell变量，设置Qt版本
@@ -44,7 +49,7 @@ jobs:
         mkdir -p $QT_VERSION-static
         # 下载源代码并解压，源代码目录D:\a\buildQt\Qt\6.8.2\qt-everywhere-src-6.8.2
         curl -L -o qt-everywhere-src.zip https://download.qt.io/archive/qt/6.8/6.8.2/single/qt-everywhere-src-6.8.2.zip
-        unzip -q qt-archive.zip -d ./$QT_VERSION
+        unzip -q qt-everywhere-src.zip -d ./6.8.2
         
         cd $QT_VERSION   #Directory: D:\a\buildQt\Qt\6.8.2
         mkdir -p build
@@ -54,17 +59,19 @@ jobs:
         cmd.exe /c "call `"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
         Get-Content "$env:temp\vcvars.txt" | Foreach-Object { if ($_ -match "^(.*?)=(.*)$") { Set-Content "env:\$($matches[1])" $matches[2] } }
         # configure
-        ../qt-everywhere-src-$QT_VERSION/configure.bat -static -static-runtime -release -prefix ../../$QT_VERSION-static/msvc2022_64 -nomake examples -nomake tests -skip qtwebengine -opensource -confirm-license -qt-libpng -qt-libjpeg -qt-zlib -qt-pcre -qt-freetype -schannel -platform win32-msvc
+        ../qt-everywhere-src-6.8.2/configure.bat -static -static-runtime -release -prefix ../../6.8.2-static/msvc2022_64 -nomake examples -nomake tests -skip qtwebengine -opensource -confirm-license -qt-libpng -qt-libjpeg -qt-zlib -qt-pcre -qt-freetype -schannel -platform win32-msvc
         #编译(不要忘记点)
         cmake --build . --parallel
         #安装(不要忘记点)
         cmake --install .
 
+    # 打包
     - name: Package binaries
       run: |
-	    #ls     #Directory: D:\a\buildQt\buildQt(即库存目录)
+        #ls     #Directory: D:\a\buildQt\buildQt(即库存目录)
         7z a Qt_6.8.2-static-Release_msvc2022_64.zip ../Qt/6.8.2-static
 
+    # 上传
     - uses: actions/upload-artifact@v4
       with:
         name: Qt_6.8.2-static-Release_msvc2022_64
