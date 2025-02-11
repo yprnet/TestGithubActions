@@ -33,9 +33,17 @@ jobs:
         
         cd ..   #Directory: D:\a\TestGithubActions\Qt
         cd ..   #Directory: D:\a\TestGithubActions
-        
+    
+    # 打包
     - name: Package binaries
       run: |
-        # 打包
-        #7z a Tset.zip ./Qt
-        ls
+        #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
+        
+        cd ..   #Directory: D:\a\TestGithubActions
+        7z a Tset.zip ./Qt
+    
+    # 上传
+    - uses: actions/upload-artifact@v4.5.0
+      with:
+        name: Tset
+        path: Tset.zip
