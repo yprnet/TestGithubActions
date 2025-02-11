@@ -13,6 +13,7 @@ jobs:
 
     - name: Build Qt
       run: |
+      cd ..
       mkdir Qt
       cd Qt
       mkdir 6.8.2
