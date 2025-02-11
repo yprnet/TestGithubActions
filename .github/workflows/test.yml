@@ -16,7 +16,7 @@ jobs:
     - name: Build Qt
       run: |
         #设置powershell变量，设置Qt版本
-        $QT_VERSION=6.8.3 
+        $QT_VERSION="6.8.3" 
       
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
         
