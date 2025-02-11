@@ -35,11 +35,11 @@ jobs:
         $QT_VERSION="6.8.2" 
       
         #ls     #Directory: D:\a\buildQt\buildQt(即库存目录)
-		
-		#D:\a\buildQt                  上级目录，这里当做根目录
-		#D:\a\buildQt\Qt               Qt目录
-		#D:\a\buildQt\Qt\6.8.2         Qt目录源代码和build文件夹存放目录
-		#D:\a\buildQt\Qt\6.8.2-static  Qt安装目录
+        
+        #D:\a\buildQt                  上级目录，这里当做根目录
+        #D:\a\buildQt\Qt               Qt目录
+        #D:\a\buildQt\Qt\6.8.2         Qt目录源代码和build文件夹存放目录
+        #D:\a\buildQt\Qt\6.8.2-static  Qt安装目录
         
         cd ..  #Directory: D:\a\buildQt
         mkdir -p Qt
@@ -48,7 +48,7 @@ jobs:
         mkdir -p $QT_VERSION
         mkdir -p $QT_VERSION-static
         # 下载源代码并解压，源代码目录D:\a\buildQt\Qt\6.8.2\qt-everywhere-src-6.8.2
-		curl -L -o qt-everywhere-src.zip https://download.qt.io/archive/qt/6.8/6.8.2/single/qt-everywhere-src-6.8.2.zip
+        curl -L -o qt-everywhere-src.zip https://download.qt.io/archive/qt/6.8/6.8.2/single/qt-everywhere-src-6.8.2.zip
         unzip -q qt-archive.zip -d ./$QT_VERSION
         
         cd $QT_VERSION   #Directory: D:\a\buildQt\Qt\6.8.2
