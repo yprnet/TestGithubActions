@@ -28,7 +28,7 @@ jobs:
         mkdir -p $QT_VERSION-static
         
         cd ..   #Directory: D:\a\TestGithubActions
-        Copy-Item -Path ./TestGithubActions/qt.conf -Destination ./Qt/6.8.2-static/
+        Copy-Item -Path ./TestGithubActions/qt.conf -Destination ./Qt/$QT_VERSION-static/
     
     # 打包
     - name: Package binaries
