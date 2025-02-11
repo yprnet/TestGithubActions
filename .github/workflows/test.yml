@@ -16,7 +16,7 @@ jobs:
     - name: Build Qt
       run: |
         #设置powershell变量，设置Qt版本
-        $QT_VERSION="6.8.3" 
+        $QT_VERSION="6.8.4" 
       
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
         
@@ -28,7 +28,7 @@ jobs:
         mkdir -p $QT_VERSION-static
         
         cd ..   #Directory: D:\a\TestGithubActions
-        Copy-Item -Path ./TestGithubActions/qt.conf -Destination ./Qt/$QT_VERSION-static/
+        Copy-Item -Path ${Env:GITHUB_WORKSPACE}/qt.conf -Destination ./Qt/$QT_VERSION-static/
     
     # 打包
     - name: Package binaries
