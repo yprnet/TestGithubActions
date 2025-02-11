@@ -10,15 +10,15 @@ jobs:
     steps:
     - name: Build Qt
       run: |
-        #ls     #Directory: D:\a\TestGithubActions\TestGithubActions即库存目录
-        
-        cd ..   #Directory: D:\a\TestGithubActions
+        #ls      #Directory: D:\a\TestGithubActions\TestGithubActions即库存目录
+        #cd ..   #Directory: D:\a\TestGithubActions
+        #以下均在D:\a\TestGithubActions\TestGithubActions下操作
         mkdir -p Qt
         
         cd Qt   #Directory: D:\a\TestGithubActions\Qt
         mkdir -p 6.8.2
         mkdir -p 6.8.2-static
-        Copy-Item -Path ../TestGithubActions/qt.conf -Destination ./6.8.2-static/
+        Copy-Item -Path ./qt.conf -Destination ./6.8.2-static/
         
         cd 6.8.2-static
         ls
