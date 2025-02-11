@@ -14,6 +14,8 @@ jobs:
     
     # 构建 Qt    
     - name: Build Qt
+    env:
+        QT_VERSION: 6.8.3
       run: |
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
         
@@ -21,18 +23,11 @@ jobs:
         mkdir -p Qt
         
         cd Qt   #Directory: D:\a\TestGithubActions\Qt
-        mkdir -p 6.8.2
-        mkdir -p 6.8.2-static
+        mkdir -p $QT_VERSION
+        mkdir -p $QT_VERSION-static
         
         cd ..   #Directory: D:\a\TestGithubActions
         Copy-Item -Path ./TestGithubActions/qt.conf -Destination ./Qt/6.8.2-static/
-        
-        cd Qt             
-        cd 6.8.2-static
-        ls
-        
-        cd ..   #Directory: D:\a\TestGithubActions\Qt
-        cd ..   #Directory: D:\a\TestGithubActions
     
     # 打包
     - name: Package binaries
