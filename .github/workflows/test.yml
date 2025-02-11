@@ -45,7 +45,7 @@ jobs:
         7z a Tset.zip ../Qt/6.8.2-static
 
     # 上传
-    - uses: actions/upload-artifact@v4.5.0
+    - uses: actions/upload-artifact@v4
       with:
         name: Tset
         path: Tset.zip
