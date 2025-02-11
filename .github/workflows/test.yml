@@ -8,6 +8,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    # 检测本仓库
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
     - name: Build Qt
       run: |
         #ls      #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
