@@ -2,7 +2,9 @@ name: Test
 
 #on: workflow_dispatch
 on: [push, pull_request]
-
+env:
+  QT_VERSION:6.8.4
+  
 jobs:
   windows_Tset:
     runs-on: windows-latest
@@ -39,5 +41,5 @@ jobs:
     # 上传
     - uses: actions/upload-artifact@v4.5.0
       with:
-        name: Tset
+        name: Tset${QT_VERSION}
         path: Tset.zip
