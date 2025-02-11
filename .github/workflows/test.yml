@@ -11,10 +11,11 @@ jobs:
     # 检测本仓库
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+    
+    # 构建 Qt    
     - name: Build Qt
       run: |
-        #ls      #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
+        #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
         
         cd ..   #Directory: D:\a\TestGithubActions
         mkdir -p Qt
@@ -23,9 +24,22 @@ jobs:
         mkdir -p 6.8.2
         mkdir -p 6.8.2-static
         
-        cd ..
+        cd ..   #Directory: D:\a\TestGithubActions
         Copy-Item -Path ./TestGithubActions/qt.conf -Destination ./Qt/6.8.2-static/
         
-        cd Qt
+        cd Qt             
         cd 6.8.2-static
         ls
+        
+        cd ..   #Directory: D:\a\TestGithubActions\Qt
+        cd ..   #Directory: D:\a\TestGithubActions
+        
+    - name: Package binaries
+      run: |
+        # 打包
+        7z a Tset.zip ./Qt
+    # 上传
+    - uses: actions/upload-artifact@v4.5.0
+      with:
+        name: Tset
+        path: Tset.zip
