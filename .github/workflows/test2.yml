@@ -3,6 +3,10 @@ name: Test2
 #on: workflow_dispatch
 on: [push, pull_request]
 
+env:
+  QT_VERSION: 6.8.2
+  FILE_NAME: Tset2
+
 jobs:
   windows_Tset:
     runs-on: windows-latest
@@ -21,10 +25,10 @@ jobs:
     - name: Package binaries
       run: |
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
-        7z a Tset2.7z ../Qt/6.8.2-static -mx=9
+        7z a ${{ env.FILE_NAME }}.7z ../Qt/${{ env.QT_VERSION }}-static -mx=9
 
     # 上传
     - uses: actions/upload-artifact@v4
       with:
-        name: Tset2
-        path: Tset2.7z
+        name: ${{ env.FILE_NAME }}
+        path: ${{ env.FILE_NAME }}.7z
