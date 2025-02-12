@@ -1,0 +1,50 @@
+name: Test3
+
+on: workflow_dispatch
+#on: [push, pull_request]
+
+env:
+  QT_VERSION: 6.8.2
+  FILE_NAME: Tset3
+
+jobs:
+  windows_Tset:
+    runs-on: windows-latest
+
+    steps:
+    # 检出本仓库
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    # 安装 Perl    
+    - name: Setup Perl
+      run: |
+        cd ..  #Directory: D:\a\TestGithubActions
+        curl -L -o strawberry-perl-64bit-portable.zip https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases/download/SP_54001_64bit_UCRT/strawberry-perl-5.40.0.1-64bit-portable.zip
+        unzip -q strawberry-perl-64bit-portable.zip -d ./Strawberry
+        D:\a\TestGithubActions\Strawberry\perl\bin\perl.exe -V
+
+    # 安装 jom
+    - name: Setup jom
+      run: |
+        cd ..  #Directory: D:\a\buildQt
+        curl -L -o jom.zip  http://download.qt.io/official_releases/jom/jom.zip
+        unzip -q jom.zip -d ./jom
+        D:\a\TestGithubActions\jom\jom.exe /VERSION
+
+    # 构建 Qt    
+    - name: Build Qt
+      run: |
+        cmd.exe /c "call `"D:\a\TestGithubActions\TestGithubActions\Test3.cmd`""
+
+    # 打包
+    - name: Package binaries
+      run: |
+        #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
+        7z a ${{env.FILE_NAME}}.7z ../Qt/${{env.QT_VERSION}}-static -mx=9
+
+    # 上传
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{env.FILE_NAME}}
+        path: ${{env.FILE_NAME}}.7z
