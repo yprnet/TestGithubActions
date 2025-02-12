@@ -1,0 +1,41 @@
+name: Test2
+
+on: workflow_dispatch
+#on: [push, pull_request]
+
+env:
+  QT_VERSION: 6.8.2
+  FILE_NAME: Tset3
+
+jobs:
+  windows_Tset:
+    runs-on: windows-latest
+
+    steps:
+    # 检出本仓库
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    # 安装 MinGW64    
+    - name: Setup MinGW64
+      run: |
+        cd ..  #Directory: D:\a\TestGithubActions
+        curl -L -o x86_64-release-posix-seh-ucrt.7z https://github.com/niXman/mingw-builds-binaries/releases/download/14.2.0-rt_v12-rev1/x86_64-14.2.0-release-posix-seh-ucrt-rt_v12-rev1.7z
+        7z x D:\a\TestGithubActions\x86_64-release-posix-seh-ucrt.7z -oD:\a\TestGithubActions
+    
+    # 构建 Qt    
+    - name: Build Qt
+      run: |
+        cmd.exe /c "call `"D:\a\TestGithubActions\TestGithubActions\Test3.cmd`""
+
+    # 打包
+    - name: Package binaries
+      run: |
+        #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
+        7z a ${{env.FILE_NAME}}.7z ../Qt/${{env.QT_VERSION}}-static -mx=9
+
+    # 上传
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{env.FILE_NAME}}
+        path: ${{env.FILE_NAME}}.7z
