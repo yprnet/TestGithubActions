@@ -3,6 +3,10 @@ name: Test
 on: workflow_dispatch
 #on: [push, pull_request]
 
+env:
+  QT_VERSION: 6.8.2
+  FILE_NAME: Tset1
+
 jobs:
   windows_Tset:
     runs-on: windows-latest
@@ -15,20 +19,17 @@ jobs:
     # 构建 Qt    
     - name: Build Qt
       run: |
-        #设置powershell变量，设置Qt版本
-        $QT_VERSION="6.8.2" 
-      
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
         
         cd ..   #Directory: D:\a\TestGithubActions
         mkdir -p Qt
         
         cd Qt   #Directory: D:\a\TestGithubActions\Qt
-        mkdir -p $QT_VERSION
-        mkdir -p $QT_VERSION-static
+        mkdir -p ${{env.QT_VERSION}}
+        mkdir -p ${{env.QT_VERSION}}-static
         
         #此段仅为测试时需要
-        cd $QT_VERSION-static
+        cd ${{env.QT_VERSION}}-static
         mkdir -p msvc2022_64
         cd msvc2022_64
         mkdir -p bin
@@ -36,16 +37,16 @@ jobs:
         cd..
         
         cd ..   #Directory: D:\a\TestGithubActions
-        Copy-Item -Path ${Env:GITHUB_WORKSPACE}/qt.conf -Destination ./Qt/$QT_VERSION-static/msvc2022_64/bin
+        Copy-Item -Path ${Env:GITHUB_WORKSPACE}/qt.conf -Destination ./Qt/${{env.QT_VERSION}}-static/msvc2022_64/bin
     
     # 打包
     - name: Package binaries
       run: |
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
-        7z a Tset.zip ../Qt/6.8.2-static
+        7z a ${{env.FILE_NAME}}.7z ../Qt/${{env.QT_VERSION}}-static -mx=9
 
     # 上传
     - uses: actions/upload-artifact@v4
       with:
-        name: Tset
-        path: Tset.zip
+        name: ${{env.FILE_NAME}}
+        path: ${{env.FILE_NAME}}.zip
