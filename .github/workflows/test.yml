@@ -49,4 +49,4 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: ${{env.FILE_NAME}}
-        path: ${{env.FILE_NAME}}.zip
+        path: ${{env.FILE_NAME}}.7z
