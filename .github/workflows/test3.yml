@@ -22,6 +22,7 @@ jobs:
         cd ..  #Directory: D:\a\TestGithubActions
         curl -L -o x86_64-release-posix-seh-ucrt.7z https://github.com/niXman/mingw-builds-binaries/releases/download/14.2.0-rt_v12-rev1/x86_64-14.2.0-release-posix-seh-ucrt-rt_v12-rev1.7z
         7z x D:\a\TestGithubActions\x86_64-release-posix-seh-ucrt.7z -oD:\a\TestGithubActions
+        D:\a\TestGithubActions\mingw64\bin\g++.exe -v
     
     # 构建 Qt    
     - name: Build Qt
