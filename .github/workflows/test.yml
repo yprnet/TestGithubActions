@@ -5,7 +5,7 @@ on: [push, pull_request]
 
 env:
   QT_VERSION: 6.8.2
-  FILE_NAME: Tset-${{env.QT_VERSION}}
+  FILE_NAME: Tset-${{QT_VERSION}}
 
 jobs:
   windows_Tset:
