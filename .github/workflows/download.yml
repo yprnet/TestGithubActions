@@ -7,8 +7,13 @@ jobs:
   windows_Tset:
     runs-on: windows-latest
 
+    steps:
+    # 检出本仓库
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
     # 下载    
-    - name: downloadQt
+    - name: Down
       run: |
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即仓库目录)
         
