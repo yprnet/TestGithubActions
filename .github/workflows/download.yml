@@ -1,0 +1,29 @@
+name: download
+
+on: workflow_dispatch
+#on: [push, pull_request]
+
+jobs:
+  windows_Tset:
+    runs-on: windows-latest
+
+    # 下载    
+    - name: download
+      run: |
+        #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即仓库目录)
+        
+        cd ..   #Directory: D:\a\TestGithubActions
+        
+        curl -L -o qt-opensource-windows-x86-5.12.3.exe https://download.qt.io/archive/qt/5.14/5.12.3/qt-opensource-windows-x86-5.12.3.exe
+    
+    # 打包
+    - name: Package binaries
+      run: |
+        #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
+        7z a qt-opensource-windows-x86-5.12.3.7z ../qt-opensource-windows-x86-5.12.3.exe -mx=9
+
+    # 上传
+    - uses: actions/upload-artifact@v4
+      with:
+        name: qt-opensource-windows-x86-5.12.3
+        path: qt-opensource-windows-x86-5.12.3.7z
