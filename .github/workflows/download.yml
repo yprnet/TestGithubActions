@@ -19,7 +19,7 @@ jobs:
         
         cd ..   #Directory: D:\a\TestGithubActions
         
-        curl -L -o qt-opensource-windows-x86-5.12.3.exe https://download.qt.io/archive/qt/5.14/5.12.3/qt-opensource-windows-x86-5.12.3.exe
+        curl -L -o qt-opensource-windows-x86-5.12.3.exe https://download.qt.io/new_archive/qt/5.14/5.12.3/qt-opensource-windows-x86-5.12.3.exe
     
     # 打包
     - name: Package binaries
