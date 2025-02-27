@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
 
     # 下载    
-    - name: download
+    - name: downloadQt
       run: |
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即仓库目录)
         
