@@ -19,16 +19,20 @@ jobs:
         
         cd ..   #Directory: D:\a\TestGithubActions
         
-        curl -L -o qt-opensource-windows-x86-5.12.3.exe https://download.qt.io/archive/qt/5.12/5.12.3/qt-opensource-windows-x86-5.12.3.exe
+        mkdir -p download
+        
+        curl -L -o Qt5.15.14-Windows-x86_64-VS2017-15.9.63-20240613.7z https://sourceforge.net/projects/fsu0413-qtbuilds/files/Qt5.15/Windows-x86_64/MSVC/Qt5.15.14-Windows-x86_64-VS2017-15.9.63-20240613.7z
+        curl -L -o Qt5.15.14-Windows-x86_64-VS2019-16.11.37-20240613.7z https://sourceforge.net/projects/fsu0413-qtbuilds/files/Qt5.15/Windows-x86_64/MSVC/Qt5.15.14-Windows-x86_64-VS2019-16.11.37-20240613.7z
+        curl -L -o Qt5.15.14-Windows-x86_64-VS2022-17.10.3-20240622.7z https://sourceforge.net/projects/fsu0413-qtbuilds/files/Qt5.15/Windows-x86_64/MSVC/Qt5.15.14-Windows-x86_64-VS2022-17.10.3-20240622.7z
     
     # 打包
     - name: Package binaries
       run: |
         #ls     #Directory: D:\a\TestGithubActions\TestGithubActions(即库存目录)
-        7z a qt-opensource-windows-x86-5.12.3.7z ../qt-opensource-windows-x86-5.12.3.exe -mx=9
+        7z a download.7z ../download -mx=9
 
     # 上传
     - uses: actions/upload-artifact@v4
       with:
-        name: qt-opensource-windows-x86-5.12.3
-        path: qt-opensource-windows-x86-5.12.3.7z
+        name: download
+        path: download.7z
